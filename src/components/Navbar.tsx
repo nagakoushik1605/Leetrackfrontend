@@ -146,9 +146,38 @@ export default function Navbar() {
           >
             <RefreshCw className="h-4 w-4" />
           </button>
-          <div className="hidden h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-purple to-brand-orange text-sm font-bold text-white sm:flex">
-            {username ? username.slice(0, 2).toUpperCase() : '??'}
-          </div>
+         <div className="relative hidden sm:flex group">
+  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-purple to-brand-orange text-sm font-bold text-white cursor-pointer">
+    {username ? username.slice(0, 2).toUpperCase() : '??'}
+  </div>
+
+  <div
+    className="
+      absolute
+      top-11
+      right-0
+      invisible
+      opacity-0
+      group-hover:visible
+      group-hover:opacity-100
+      transition-all
+      duration-200
+      rounded-lg
+      bg-slate-900
+      border
+      border-slate-700
+      px-3
+      py-2
+      text-sm
+      text-white
+      shadow-xl
+      whitespace-nowrap
+      z-50
+    "
+  >
+    {username || "No username"}
+  </div>
+</div>
 
           <button
             onClick={handleLogout}

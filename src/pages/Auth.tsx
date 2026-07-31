@@ -19,7 +19,7 @@ export default function Auth() {
   const { setUsername } = useUsername();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string } | null)?.from ?? '/dashboard';
+  const from = '/dashboard';
 
   // This effect is the fix for the "blank page until refresh" bug: calling
   // navigate() right after signInWithUsername() resolved was too early —
