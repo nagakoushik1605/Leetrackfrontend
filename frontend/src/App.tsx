@@ -55,17 +55,25 @@ export default function App() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route
-          path="/login"
-          element={loading ? <FullScreenLoader /> : session ? <Navigate to="/" replace /> : <Auth />}
-        />
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Landing />
-            </RequireAuth>
-          }
-        />
+  path="/login"
+  element={
+    loading ? (
+      <FullScreenLoader />
+    ) : session ? (
+      <Navigate to="/" replace />
+    ) : (
+      <Auth />
+    )
+  }
+/>
+      <Route
+  path="/"
+  element={
+    <RequireAuth>
+      <Landing />
+    </RequireAuth>
+  }
+/>
         <Route
           path="/dashboard"
           element={

@@ -51,6 +51,7 @@ export default function Leaderboard() {
     if (username) pool.add(username);
     return Array.from(pool);
   }, [registeredUsernames, username]);
+  console.log("Leaderboard usernames:", usernames);
 
   const results = useQueries({
     queries: usernames.map((u) => ({
@@ -81,9 +82,17 @@ export default function Leaderboard() {
   });
 
   const isLoading = results.some((r) => r.isLoading);
-  const entries = results
-    .map((r) => r.data)
-    .filter((d): d is LeaderboardEntry => Boolean(d));
+  const entries = Array.from(
+  new Map(
+    results
+      .map((r) => r.data)
+      .filter((d): d is LeaderboardEntry => Boolean(d))
+      .map((entry) => [entry.username.toLowerCase(), entry])
+  ).values()
+);
+
+console.log("Results:", results);
+console.log("Entries:", entries);
 
   const sorted = useMemo(() => {
     const copy = [...entries];

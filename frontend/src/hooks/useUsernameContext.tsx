@@ -91,7 +91,14 @@ export function UsernameProvider({ children }: { children: ReactNode }) {
       if (user) {
         supabase
           .from('profiles')
-          .upsert({ id: user.id, email: user.email, leetcode_username: next }, { onConflict: 'id' })
+          .upsert(
+  {
+    id: user.id,
+    email: user.email,
+    leetcode_username: next?.trim().toLowerCase() ?? null,
+  },
+  { onConflict: 'id' }
+)
           .then(({ error }) => {
             if (error) {
               // eslint-disable-next-line no-console
